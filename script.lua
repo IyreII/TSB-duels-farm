@@ -1,5 +1,9 @@
 repeat task.wait() until game:IsLoaded()
 
+queue_on_teleport([[
+loadstring(game:HttpGet("https://raw.githubusercontent.com/IyreII/TSB-duels-farm/refs/heads/main/script.lua"))()
+]])
+
 local service; service = setmetatable({}, {
     __index = function(_, Key)
         service[Key] = cloneref(game:GetService(Key))
