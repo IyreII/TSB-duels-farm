@@ -108,9 +108,9 @@ c = RunService.Heartbeat:Connect(function()
 
     if not lockOn then
         HumanoidRootPart.CFrame = CFrame.new(0, -600, 0)
-        --sethiddenproperty(HumanoidRootPart, "PhysicsRepRootPart", nil)
+        sethiddenproperty(HumanoidRootPart, "PhysicsRepRootPart", nil)
     else
-        --sethiddenproperty(HumanoidRootPart, "PhysicsRepRootPart", lockOn.HumanoidRootPart)
+        sethiddenproperty(HumanoidRootPart, "PhysicsRepRootPart", lockOn.HumanoidRootPart)
         HumanoidRootPart.CFrame = CFrame.new(lockOn.HumanoidRootPart.Position - lockOn.HumanoidRootPart.CFrame.LookVector * 1.5 + lockOn.HumanoidRootPart.Velocity * Player:GetNetworkPing() * 1.2, lockOn.HumanoidRootPart.CFrame.LookVector);
     end
 
