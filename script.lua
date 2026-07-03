@@ -72,6 +72,19 @@ service.StarterGui:SetCore("SendNotification", {
     Duration = 2
 })
 
+coroutine.wrap(function()
+    repeat
+        pcall(function()
+            firesignal(Player.PlayerGui.Ranked.Container.realholder.newgame.Activated)
+            firesignal(Player.PlayerGui.Ranked.Container.realholder.newgame.MouseButton1Click)
+            firesignal(Player.PlayerGui.Ranked.Container.realholder.newgame.MouseButton1Down)
+            firesignal(Player.PlayerGui.Ranked.Container.realholder.newgame.MouseButton1Up)
+        end)
+        task.wait(1)
+    until secondcoming
+end)()
+
+
 --// wait for game to start
 repeat task.wait(0.5) until workspace:GetAttribute("GlobalStun") ~= true
 task.wait(2)
@@ -95,7 +108,9 @@ c = RunService.Heartbeat:Connect(function()
 
     if not lockOn then
         HumanoidRootPart.CFrame = CFrame.new(0, -600, 0)
+        sethiddenproperty(HumanoidRootPart, "PhysicsRepRootPart", nil)
     else
+        sethiddenproperty(HumanoidRootPart, "PhysicsRepRootPart", lockOn.HumanoidRootPart)
         HumanoidRootPart.CFrame = CFrame.new(lockOn.HumanoidRootPart.Position - lockOn.HumanoidRootPart.CFrame.LookVector * 1.5 + lockOn.HumanoidRootPart.Velocity * Player:GetNetworkPing() * 1.2, lockOn.HumanoidRootPart.CFrame.LookVector);
     end
 
@@ -128,6 +143,7 @@ local function set()
     end)()
 end
 
+
 repeat
     set()
 
@@ -152,13 +168,3 @@ c:Disconnect()
 HumanoidRootPart.CFrame = old
 
 task.wait(5)
-
-repeat
-    pcall(function()
-        firesignal(Player.PlayerGui.Ranked.Container.realholder.newgame.Activated)
-        firesignal(Player.PlayerGui.Ranked.Container.realholder.newgame.MouseButton1Click)
-        firesignal(Player.PlayerGui.Ranked.Container.realholder.newgame.MouseButton1Down)
-        firesignal(Player.PlayerGui.Ranked.Container.realholder.newgame.MouseButton1Up)
-    end)
-    task.wait(1)
-until secondcoming
